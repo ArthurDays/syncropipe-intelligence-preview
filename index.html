@@ -76,8 +76,27 @@
       </div>
 
       <div class="hero-visual" aria-label="Identidade visual da SYNCROPIPE INTELLIGENCE">
-        <div class="orbit orbit-a"></div>
-        <div class="orbit orbit-b"></div>
+        <svg class="sync-network" viewBox="0 0 600 520" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="syncLine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#09d7dc"/>
+              <stop offset=".55" stop-color="#6ea5ff"/>
+              <stop offset="1" stop-color="#9c57f2"/>
+            </linearGradient>
+          </defs>
+          <path class="sync-trace sync-trace-one" id="syncPathOne" d="M 116 76 H 170 Q 190 76 190 96 V 139 Q 190 158 209 158 H 260"/>
+          <path class="sync-trace sync-trace-two" id="syncPathTwo" d="M 575 244 H 484 Q 462 244 451 259 L 405 296"/>
+          <path class="sync-trace sync-trace-three" id="syncPathThree" d="M 130 466 H 180 Q 201 466 201 444 V 400 Q 201 383 219 374 L 271 349"/>
+          <path class="sync-branch" d="M 170 96 H 358 Q 380 96 380 118 V 144"/>
+          <path class="sync-branch" d="M 484 244 V 395 Q 484 414 465 414 H 406"/>
+          <path class="sync-branch" d="M 201 400 H 115 Q 99 400 99 384 V 353"/>
+          <circle class="sync-junction" cx="190" cy="139" r="5"/>
+          <circle class="sync-junction sync-junction-violet" cx="484" cy="244" r="5"/>
+          <circle class="sync-junction" cx="201" cy="400" r="5"/>
+          <circle class="sync-packet" r="5"><animateMotion dur="4.8s" repeatCount="indefinite"><mpath href="#syncPathOne"/></animateMotion></circle>
+          <circle class="sync-packet sync-packet-violet" r="5"><animateMotion dur="5.6s" repeatCount="indefinite"><mpath href="#syncPathTwo"/></animateMotion></circle>
+          <circle class="sync-packet" r="5"><animateMotion dur="6.2s" repeatCount="indefinite"><mpath href="#syncPathThree"/></animateMotion></circle>
+        </svg>
         <div class="logo-stage">
           <div class="logo-glow"></div>
           <img src="syncropipe-logo-transparent.webp" width="1254" height="1254" fetchpriority="high" alt="Logo da SYNCROPIPE INTELLIGENCE sem fundo">

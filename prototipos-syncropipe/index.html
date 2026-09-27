@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061625">
+  <meta name="description" content="Pesquisa comercial e protótipos interativos da SYNCROPIPE em 22 nichos e subnichos. Da oportunidade à demonstração e ao piloto.">
+  <title>Protótipos comerciais | SYNCROPIPE INTELLIGENCE</title>
+  <link rel="icon" href="assets/syncropipe-favicon.png" type="image/png">
+  <link rel="preload" href="assets/syncropipe-logo-transparent.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="styles.css">
+  <script src="nichos-adicionais.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação dos protótipos">
+      <a class="brand" href="#inicio" aria-label="SYNCROPIPE INTELLIGENCE — início">
+        <img src="assets/syncropipe-favicon.png" alt="" width="44" height="44">
+        <span><strong>SYNCROPIPE</strong><small>INTELLIGENCE</small></span>
+      </a>
+      <div class="sidebar-label">LABORATÓRIO COMERCIAL</div>
+      <p class="sidebar-intro">Encontre um ramo, valide a oportunidade e apresente um fluxo que faça sentido.</p>
+      <div class="niche-filters">
+        <label for="niche-search">Buscar nicho ou empresa</label>
+        <input id="niche-search" type="search" placeholder="Ex.: hotel, clínica, Smarty" autocomplete="off">
+        <label for="niche-group" class="sr-only">Filtrar por área</label>
+        <select id="niche-group"><option value="">Todas as áreas</option></select>
+        <span id="niche-count" role="status"></span>
+      </div>
+      <nav id="niche-nav" class="niche-nav" aria-label="Selecionar nicho"></nav>
+      <p id="no-niches" hidden>Nenhum ramo encontrado. Tente outro termo.</p>
+      <div class="sidebar-footer">
+        <span class="live-dot" aria-hidden="true"></span>
+        Pesquisa de empresas públicas<br>Exemplos de atendimento fictícios
+      </div>
+    </aside>
+
+    <main id="inicio" class="main-content">
+      <header class="topbar">
+        <div><span class="eyebrow">PROTÓTIPOS INTERATIVOS</span><span class="topbar-separator">/</span><span id="breadcrumb-niche">Oficinas</span></div>
+        <span class="demo-badge">DEMO · SEM ENVIO REAL</span>
+      </header>
+      <nav class="workflow-nav" aria-label="Fluxo da apresentação">
+        <a href="#research"><span>01</span> Entender a oportunidade</a>
+        <a href="#demonstracao"><span>02</span> Demonstrar o fluxo</a>
+        <a href="#abordagem"><span>03</span> Preparar a conversa</a>
+      </nav>
+
+      <section class="hero" aria-labelledby="scenario-title">
+        <div class="hero-copy">
+          <p id="scenario-kicker" class="kicker"></p>
+          <h1 id="scenario-title"></h1>
+          <p id="scenario-description" class="hero-description"></p>
+          <div class="hero-actions">
+            <button id="play-button" class="button button-primary" type="button">Reproduzir demonstração <span aria-hidden="true">↗</span></button>
+            <button id="reset-button" class="button button-quiet" type="button">Reiniciar</button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="visual-node node-one"></div>
+          <div class="visual-node node-two"></div>
+          <div class="visual-node node-three"></div>
+          <div class="visual-core"><img src="assets/syncropipe-logo-transparent.webp" alt=""></div>
+          <div class="visual-label visual-label-one">CAPTAR</div>
+          <div class="visual-label visual-label-two">CONECTAR</div>
+          <div class="visual-label visual-label-three">EVOLUIR</div>
+        </div>
+      </section>
+
+      <section id="research" class="research-panel" aria-labelledby="research-title">
+        <div class="research-heading"><div><p class="eyebrow">PONTO DE PARTIDA</p><h2 id="research-title">Uma oportunidade para validar</h2></div><a id="research-source" target="_blank" rel="noopener noreferrer">Consultar site oficial ↗</a></div>
+        <div class="research-grid"><div><span class="minor-label">REFERÊNCIA PESQUISADA</span><strong id="research-company"></strong><p id="research-signal"></p></div><div><span class="minor-label">HIPÓTESE DE MELHORIA</span><p id="research-opportunity"></p></div></div>
+        <p class="research-note">Pesquisa em 25/09/2026. A necessidade e os sistemas internos precisam ser confirmados em conversa.</p>
+      </section>
+
+      <section id="demonstracao" class="demo-area" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">JORNADA EM QUATRO ETAPAS</p>
+            <h2 id="demo-title">Veja o fluxo acontecer</h2>
+          </div>
+          <div id="step-count" class="step-count" aria-live="polite">01 / 04</div>
+        </div>
+        <div id="timeline" class="timeline" aria-label="Etapas da demonstração"></div>
+        <div class="simulation-options"><label for="flow-state">Teste uma situação</label><select id="flow-state"><option value="normal">Informações completas — seguir fluxo</option><option value="pending">Falta informação — aguardar retorno</option></select><span id="flow-feedback" role="status">A equipe valida cada etapa antes de avançar.</span></div>
+
+        <div class="demo-grid">
+          <article class="case-panel">
+            <div class="panel-topline"><span>REGISTRO SIMULADO</span><span id="case-id" class="case-id"></span></div>
+            <h3 id="case-name"></h3>
+            <p id="case-summary" class="case-summary"></p>
+            <dl id="case-fields" class="case-fields"></dl>
+            <div class="panel-divider"></div>
+            <div class="current-state">
+              <div><span class="minor-label">SITUAÇÃO</span><strong id="status-text" aria-live="polite"></strong></div>
+              <span id="status-pip" class="status-pip" aria-hidden="true"></span>
+            </div>
+          </article>
+
+          <article class="action-panel">
+            <div class="panel-topline"><span>OPERAÇÃO</span><span id="owner-tag" class="owner-tag"></span></div>
+            <h3 id="action-title"></h3>
+            <p id="action-description"></p>
+            <div class="action-context">
+              <span class="minor-label">CONTEXTO PRESERVADO</span>
+              <p id="context-text"></p>
+            </div>
+            <div class="action-footer"><span class="minor-label">PRÓXIMO PASSO</span><strong id="next-action"></strong></div>
+          </article>
+
+          <article class="phone-panel" aria-label="Prévia de conversa simulada">
+            <div class="phone"><div class="phone-notch" aria-hidden="true"></div>
+              <div class="phone-header"><span class="phone-avatar">S</span><div><strong>SYNCROPIPE · Exemplo</strong><small>Conversa simulada</small></div><span class="phone-menu" aria-hidden="true">···</span></div>
+              <div class="phone-conversation"><p id="phone-date" class="phone-date">EXEMPLO FICTÍCIO</p><div id="phone-message"></div><div class="phone-note">Nenhuma mensagem é enviada nesta demonstração.</div></div>
+              <div class="phone-compose"><span>Mensagem de exemplo</span><span aria-hidden="true">➤</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="step-controls">
+          <button id="prev-button" class="button button-quiet" type="button">← Voltar</button>
+          <button id="next-button" class="button button-primary" type="button">Próxima etapa →</button>
+        </div>
+      </section>
+
+      <section id="abordagem" class="outreach-panel" aria-labelledby="outreach-title">
+        <div class="research-heading"><div><p class="eyebrow">PRÓXIMO PASSO COMERCIAL</p><h2 id="outreach-title">Comece com uma pergunta relevante.</h2></div><a class="button button-quiet" href="../prospeccao-syncropipe/prospectos-syncropipe-nichos-ampliados.xlsx" download>Baixar planilha · 44 empresas ↓</a></div>
+        <p class="outreach-description">Use o contexto pesquisado, confirme o problema e proponha um piloto depois do diagnóstico.</p>
+        <label for="outreach-draft">Rascunho de abordagem — revise antes de usar</label>
+        <textarea id="outreach-draft" rows="5"></textarea>
+        <div class="outreach-actions"><button id="copy-outreach" class="button button-primary" type="button">Copiar abordagem</button><span id="copy-status" role="status"></span></div>
+        <div class="qualification-grid"><div><span class="minor-label">CONFIRMAR NA CONVERSA</span><p id="qualification-text"></p></div><div><span class="minor-label">MEDIR NO PILOTO</span><p id="metric-text"></p></div></div>
+        <p class="research-note">Depois da conversa, registre na planilha o status, o responsável, o resultado e a data do próximo contato.</p>
+      </section>
+
+      <section class="pitch-grid" aria-label="Enquadramento da proposta">
+        <article class="pitch-card"><span class="card-index">01 / MELHORIA</span><h2>O que demonstrar</h2><p id="improvement-text"></p></article>
+        <article class="pitch-card"><span class="card-index">02 / PILOTO</span><h2>Primeira entrega</h2><p id="pilot-text"></p></article>
+        <article class="pitch-card"><span class="card-index">03 / CONVERSA</span><h2>Pergunta ao cliente</h2><p id="question-text"></p></article>
+      </section>
+
+      <footer class="footer"><span>SYNCROPIPE INTELLIGENCE · PROTÓTIPOS COMERCIAIS</span><span>Fluxos ilustrativos com dados fictícios.</span></footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -63,8 +63,6 @@ body {
 }
 body::before { content: ""; position: fixed; z-index: 1; inset: 0; pointer-events: none; box-shadow: inset 0 0 190px rgba(6,28,48,.065); }
 body > header, body > main, body > footer { position: relative; z-index: 2; }
-.preview-banner { position: relative; z-index: 30; padding: 8px 16px; color: #e7fbff; background: #061c30; border-bottom: 1px solid rgba(9,215,220,.35); font-size: .75rem; font-weight: 700; text-align: center; letter-spacing: .01em; }
-.preview-site #briefingForm { display: none; }
 .matrix-canvas {
   position: fixed;
   inset: 0;
@@ -457,7 +455,9 @@ h1 em, h2 em { font-style: normal; color: var(--violet); }
 .examples-note { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 30px; margin-top: 46px; padding-top: 25px; border-top: 1px solid var(--line); }
 .examples-note > span { color: var(--violet); font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
 .examples-note p { margin: 0; color: var(--muted); font-size: .86rem; }
-.examples-note a { color: var(--navy); font-size: .83rem; font-weight: 800; }
+.examples-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 16px; }
+.examples-note a { color: var(--navy); font-size: .83rem; font-weight: 800; white-space: nowrap; }
+.examples-actions a:first-child { color: var(--violet); }
 .examples-note a b { color: var(--cyan); margin-left: 5px; }
 @keyframes exampleFloat { 0%,100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); } 50% { transform: translateY(-8px) rotateX(.8deg) rotateY(-1deg); } }
 
@@ -830,6 +830,7 @@ html[data-theme="dark"] .faq-intro h2 em { color: #ad77f1; }
   .example-card, .example-card:nth-child(even) { width: min(84vw, 340px); flex: 0 0 min(84vw, 340px); margin-top: 0; scroll-snap-align: center; }
   .example-preview { min-height: 320px; padding: 30px 24px; }
   .examples-note { width: min(100% - 30px, 1180px); margin-inline: auto; grid-template-columns: 1fr; gap: 13px; }
+  .examples-actions { justify-content: flex-start; gap: 14px; }
   .results { padding-bottom: 80px; }
   .results-panel { padding: 42px 26px; border-radius: 26px; }
   .process-grid { grid-template-columns: 1fr; }

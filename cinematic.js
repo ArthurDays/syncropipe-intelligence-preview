@@ -173,9 +173,9 @@
       // --- conduíte de luz: do hero até #prototipos, pelas laterais e pelos vãos entre as seções ---
       const NS = 'http://www.w3.org/2000/svg';
       const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'cine-conduit'); svg.setAttribute('aria-hidden', 'true');
-      svg.innerHTML = '<defs><linearGradient id="cineBeam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#09d7dc"/><stop offset=".55" stop-color="#6ea5ff"/><stop offset="1" stop-color="#9c57f2"/></linearGradient></defs><path class="track"/><path class="beam"/><rect class="end" width="10" height="10" rx="2"/><circle class="pkt" r="3.5"/><circle class="pkt" r="3.5"/><circle class="pkt" r="3.5"/><circle class="tip" r="5"/>';
+      svg.innerHTML = '<defs><linearGradient id="cineBeam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#09d7dc"/><stop offset=".55" stop-color="#6ea5ff"/><stop offset="1" stop-color="#9c57f2"/></linearGradient></defs><path class="track"/><path class="glow"/><path class="beam"/><rect class="end" width="10" height="10" rx="2"/><circle class="pkt" r="3.5"/><circle class="pkt" r="3.5"/><circle class="pkt" r="3.5"/><circle class="tip" r="5"/>';
       main.prepend(svg);
-      const [track, beam] = $$('path', svg), tip = $('.tip', svg), end = $('.end', svg);
+      const [track, glow, beam] = $$('path', svg), tip = $('.tip', svg), end = $('.end', svg);
       const stops = ['.hero', '.applications', '.services', '.integration-section', '.ai-agent-section', '.examples-showcase', '.prototype-lab'].map((s) => $(s));
       const ringSel = '.applications, .service-card, .integration-card, .ai-agent-panel, .prototype-lab';
       const state = { p: 0 }; let total = 0, table = [], y0 = 0, y1 = 0, marks = [];
@@ -197,7 +197,7 @@
           if (r < 1) continue;
           d += ` L${bx - (bx - ax) / l1 * r},${by - (by - ay) / l1 * r} Q${bx},${by} ${bx + (qx - bx) / l2 * r},${by + (qy - by) / l2 * r}`; }
         d += ` L${pts.at(-1)}`;
-        track.setAttribute('d', d); beam.setAttribute('d', d);
+        track.setAttribute('d', d); glow.setAttribute('d', d); beam.setAttribute('d', d);
         end.setAttribute('x', cx - 5); end.setAttribute('y', lab.y - 5);
         // tabela scroll → comprimento: trechos verticais acompanham a tela, os horizontais passam rápido
         total = beam.getTotalLength(); table = [0]; const ys = [pts[0][1]]; let prev = beam.getPointAtLength(0);
@@ -217,7 +217,7 @@
         while (lo < hi) { const mid = (lo + hi) >> 1; table[mid] < s ? lo = mid + 1 : hi = mid; } return Math.min(total, lo * 6); }
       function draw() {
         const L = lengthAt(state.p), pt = beam.getPointAtLength(L);
-        beam.style.strokeDasharray = `${L} ${total + 10}`; tip.setAttribute('cx', pt.x); tip.setAttribute('cy', pt.y); tip.style.opacity = L > 0 && L < total ? 1 : 0;
+        beam.style.strokeDasharray = glow.style.strokeDasharray = `${L} ${total + 10}`; tip.setAttribute('cx', pt.x); tip.setAttribute('cy', pt.y); tip.style.opacity = L > 0 && L < total ? 1 : 0;
         svg.classList.toggle('arrived', L >= total - 1);
         for (const m of marks) { const lit = L >= m.len && L > 0;
           if (m.ring) { if (lit !== m.ring.classList.contains('lit')) { m.ring.style.animationDuration = ''; m.ring.classList.toggle('lit', lit); } }

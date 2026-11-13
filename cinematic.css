@@ -12,7 +12,9 @@ html.lenis.lenis-smooth, html.cine-on { scroll-behavior: auto !important; } /* a
 .cine-conduit { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .cine-conduit path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .cine-conduit .track { stroke: var(--line); stroke-width: 1.5; }
-.cine-conduit .beam { stroke: url(#cineBeam); stroke-width: 2.5; filter: drop-shadow(0 0 6px var(--cyan)) drop-shadow(0 0 18px color-mix(in srgb, var(--violet) 70%, transparent)); }
+/* brilho por traço largo, não por filter: drop-shadow num caminho da altura da página custava ~10 fps */
+.cine-conduit .glow { stroke: url(#cineBeam); stroke-width: 9; opacity: .22; }
+.cine-conduit .beam { stroke: url(#cineBeam); stroke-width: 2.5; }
 .cine-conduit .tip { fill: var(--cyan-soft); filter: drop-shadow(0 0 10px var(--cyan)); }
 .cine-conduit .pkt { fill: var(--cyan-soft); opacity: 0; filter: drop-shadow(0 0 6px var(--cyan)); }
 .cine-conduit .end { fill: var(--cyan); opacity: .35; transition: opacity .4s; }

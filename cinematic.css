@@ -114,6 +114,15 @@ html.cine-on .cta-card { scale: calc(.88 + .12 * var(--cine-cta)); box-shadow: v
 /* ---------- Mobile: barra inferior e indicadores ---------- */
 .bottom-nav, .deck-dots { display: none; }
 @media (max-width: 1023px) { .cine-net { display: none; } }
+/* mobile: aurora dentro do painel do hero. Só CSS e só transform (roda na GPU, sem JavaScript) */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  .hero::after { content: ""; position: absolute; z-index: -1; inset: -35%; pointer-events: none; will-change: transform;
+    background:
+      radial-gradient(circle 46vmin at 30% 34%, color-mix(in srgb, var(--cyan) 30%, transparent), transparent),
+      radial-gradient(circle 52vmin at 70% 62%, color-mix(in srgb, var(--violet) 44%, transparent), transparent);
+    animation: auroraDrift 22s ease-in-out infinite alternate; }
+}
+@keyframes auroraDrift { from { transform: rotate(0deg) scale(1); } to { transform: rotate(150deg) scale(1.2); } }
 
 @media (max-width: 1023px) {
   body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }

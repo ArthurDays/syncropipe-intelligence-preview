@@ -42,7 +42,13 @@
     // com mouse, o protótipo só captura a roda depois de um clique; ao sair dele, a página volta a rolar
     if (matchMedia('(pointer: fine)').matches) { const stage = labFrame.parentElement; stage.classList.add('lab-idle');
       stage.addEventListener('click', () => stage.classList.remove('lab-idle'));
-      stage.addEventListener('pointerleave', () => stage.classList.add('lab-idle')); }
+      // cursor dentro do iframe não gera eventos aqui (e dispara pointerleave falso): só volta à espera quando a página vê o cursor fora do palco
+      addEventListener('pointermove', (ev) => { if (!stage.contains(ev.target)) stage.classList.add('lab-idle'); }, { passive: true }); }
+    // "Quero isso para <nicho>" no protótipo: abre o briefing (openBriefing vem do script.js) já com o ramo no desafio
+    const askFor = (nicho) => { if (typeof openBriefing !== 'function') return; openBriefing();
+      const d = $('#briefingForm [name="desafio"]'); if (d && !d.value) d.value = `Vi o protótipo de ${String(nicho).slice(0, 60)} e quero algo parecido. `; };
+    addEventListener('message', (ev) => { if (ev.origin === new URL(labFrame.src).origin && ev.data?.syncropipe === 'briefing') askFor(ev.data.nicho); });
+    const linkNiche = new URLSearchParams(location.search).get('nicho'); if (linkNiche) askFor(linkNiche);   // link aberto fora da landing
   }
 
   // ---------- Desktop ----------

@@ -131,6 +131,14 @@ const byId = new Map(scenarios.map(item => [item.id,item]));
 const element = id => document.getElementById(id);
 const nav = element('niche-nav');
 const requestedNiche=new URLSearchParams(location.search).get('nicho') || location.hash.slice(1);
+// público por padrão (visitante e link de prospecção); a equipe abre com ?equipe=1 e vê pesquisa, abordagem e planilha
+const isPublic=!new URLSearchParams(location.search).has('equipe');
+document.body.classList.toggle('is-public',isPublic);
+// visitante pede o briefing: dentro da landing (iframe) a página-mãe abre o formulário; fora dela, vai para a landing
+function askBriefing(item){
+  if(window.parent!==window)window.parent.postMessage({syncropipe:'briefing',nicho:item.label},'*');
+  else location.href=`../?nicho=${encodeURIComponent(item.label)}#contato`;
+}
 let currentId = byId.has(requestedNiche) ? requestedNiche : scenarios[0].id;
 let currentStep = 0;
 let playback = null;
@@ -287,14 +295,14 @@ function render(){
   }
   if(pending){const bubble=document.createElement('div');bubble.className='message message-pending';bubble.textContent='Precisamos confirmar uma informação para seguir. Um responsável vai revisar a pendência e retornar.';messages.append(bubble)}
   const conversation=messages.closest('.phone-conversation');conversation.scrollTop=conversation.scrollHeight;
-  element('flow-feedback').textContent=pending?'Fluxo pausado: a pendência continua visível para a equipe.':currentStep===item.stages.length-1?'Demonstração concluída. Use a pergunta abaixo para validar o interesse.':'A equipe valida cada etapa antes de avançar.';
+  element('flow-feedback').textContent=pending?'Fluxo pausado: a pendência continua visível para a equipe.':currentStep===item.stages.length-1?(isPublic?'Demonstração concluída.':'Demonstração concluída. Use a pergunta abaixo para validar o interesse.'):'A equipe valida cada etapa antes de avançar.';
   document.querySelector('.demo-area').classList.toggle('has-pending',pending);
   element('improvement-text').textContent=item.improvement;
   element('pilot-text').textContent=item.pilot;
   element('question-text').textContent=item.question;
   element('prev-button').disabled=currentStep===0 || pending;
   element('next-button').disabled=pending;
-  element('next-button').textContent=currentStep===item.stages.length-1?'Preparar abordagem ↓':'Próxima etapa →';
+  element('next-button').textContent=currentStep===item.stages.length-1?(isPublic?`Quero isso para ${item.label.toLowerCase()} ↗`:'Preparar abordagem ↓'):'Próxima etapa →';
   element('play-button').disabled=pending;
 }
 
@@ -304,7 +312,7 @@ function selectNiche(id){
 }
 
 element('prev-button').addEventListener('click',()=>{stopPlayback();currentStep=Math.max(0,currentStep-1);render()});
-element('next-button').addEventListener('click',()=>{stopPlayback();if(currentStep===byId.get(currentId).stages.length-1){element('abordagem').scrollIntoView({behavior:'smooth',block:'start'});return}currentStep++;render()});
+element('next-button').addEventListener('click',()=>{stopPlayback();if(currentStep===byId.get(currentId).stages.length-1){if(isPublic){askBriefing(byId.get(currentId));return}element('abordagem').scrollIntoView({behavior:'smooth',block:'start'});return}currentStep++;render()});
 element('reset-button').addEventListener('click',()=>{stopPlayback();currentStep=0;pending=false;element('flow-state').value='normal';render()});
 element('play-button').addEventListener('click',()=>{
   if(playback){stopPlayback();return}
